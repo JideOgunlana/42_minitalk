@@ -61,7 +61,6 @@ int main(int argc, char *argv[])
 {
 	pid_t 	server_pid;
 	int		message_len;
-	char	*res;
 	
 	if (argc != 3)
 	{
@@ -70,7 +69,6 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		res = NULL;
 		server_pid = ft_atoi(argv[1]);
 		if (server_pid <= 0)
 		{

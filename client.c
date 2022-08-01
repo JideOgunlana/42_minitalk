@@ -42,20 +42,19 @@ int main(int argc, char* argv[])
 {
     pid_t server_pid;
     char *message;
-    t_client message_length;
-    t_client *my_mssg_len;
     // int bit = 0b00000000;
     char *res;
 
     if (argc != 3)
     {
         printf("Usage: ./client <server_pid> <message>\n");
+        exit(1);
     }
     else
     {
         server_pid = atoi(argv[1]);
         message = argv[2];
-        int mssglen= (int) strlen(message);
+        int mssglen= strlen(message);
         printf("%d - message length\n", mssglen);
         // bit += message[0];
         int i;
@@ -69,11 +68,12 @@ int main(int argc, char* argv[])
             j = 7;
             res = (char *) malloc(sizeof(char) * 8 + 1);
             res[8] = '\0';
-            printf("%c\n", message[mi]);
+            printf("%u\n", message[mi]);
+
             while (i < 8)
             {
                 // printf("%d, %d\n", bit % 2, j);
-                res[j] = message[mi] % 2 + '0';
+                res[j] = (message[mi] + 256) % 2 + '0';
                 message[mi] = message[mi] >> 1;
                 j--;
                 i++;
@@ -84,23 +84,20 @@ int main(int argc, char* argv[])
             {
                 if (res[i] == '0')
                 {
-                    printf("SIGUSR1\n");
+                    // printf("SIGUSR1\n");
                     kill(server_pid, SIGUSR1);
                     // usleep(100);
                 }
                 else if (res[i] == '1')
                 {
-                    printf("SIGUSR2\n");
+                    // printf("SIGUSR2\n");
                     kill(server_pid, SIGUSR2);
                     // usleep(100);
                 }
-                else
-                {
-                    printf("Error!\n");
-                }
-                usleep(10);
+                usleep(400);
                 i++;
             }
+            
             free(res);
             // sleep(1);
             mi++;
@@ -109,7 +106,7 @@ int main(int argc, char* argv[])
         
         // printf("%d\n", bit);
         // kill(server_pid, SIGUSR1);
-         system("leaks client");
+        //  system("leaks client");
     }
     return (0);
 }

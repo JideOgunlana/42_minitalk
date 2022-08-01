@@ -1,9 +1,18 @@
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/01 16:41:28 by bogunlan          #+#    #+#             */
+/*   Updated: 2022/08/01 17:47:18 by bogunlan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_minitalk.h"
 
-t_client *val;
+t_server *val;
 
 int ft_isblank(char c)
 {
@@ -49,91 +58,62 @@ int		ft_atoi_base(const char *str, int str_base)
 	return (result * sign);
 }
 
-void	handler_sig(int);
-
-// handler_sig fxn determines what signal is received and what should be done with this signal
-
-// void	handler_sig(int signum)
-// {
-// 	static int	c = 0;
-// 	static int	bits = 0;
-// 	int			i;
-// 	int			n;
-
-// 	if (signum == SIGUSR1)
-// 	{
-// 		i = 1;
-// 		n = 1;
-// 		while (i++ < (8 - bits))
-// 			n *= 2;
-// 		c += n;
-// 	}
-// 	bits++;
-// 	if (bits == 8)
-// 	{
-// 		write(1, &c, 1);
-// 		bits = 0;
-// 		c = 0;
-// 	}
-// }
-
-void handler_sig(int signum)
+void	handle_sig(int signum)
 {
-    val->bit += 1;
+	// int	c;
+
+	// val->bit += 1;
+	// if (signum == SIGUSR1)
+	// 	val->messg[val->counter] = '0';
+	// else if (signum == SIGUSR2)
+	// 	val->messg[val->counter] = '1';
+	// if (val->bit == 8)
+	// {
+	// 	c = ft_atoi_base(val->messg, 2);
+	// 	write(STDOUT_FILENO, &c, 1);
+	// 	val->bit = 0;
+	// }
+	// val->counter++;
+	static int	c = 0;
+	static int	bits = 0;
+	int			i;
+	int			n;
+
 	if (signum == SIGUSR1)
 	{
-        // val->bit += 1;
-        // val->s[val->i] = SIGUSR1 + '0';
-        val->mesg[val->i] = '0'; 
-		// printf("Received SIGUSR1 -> %d\n", signum);
-		// exit(0);
+		i = 1;
+		n = 1;
+		while (i++ < (8 - bits))
+			n *= 2;
+		c += n;
 	}
-    else if(signum == SIGUSR2)
-    {
-        // val->bit += 1;
-        // val->s[val->i] = SIGUSR2 + '0';
-        val->mesg[val->i] = '1';
-
-        // printf("Received SIGUSR2 -> %d\n", signum);
-        // exit(0);
-    }
-    if (val->bit == 8)
-    {
-        // printf("%s\n", val->mesg);
-        int c = ft_atoi_base(val->mesg, 2);
-        // printf("%s\n", val->mesg);
-        write(1, &c, 1);
-        val->bit = 0;
-    }
-    // printf("**%d**\n", val->bit);
-    // printf("##%d##\n", val->i);
-    val->i++;
+	bits++;
+	if (bits == 8)
+	{
+		ft_printf("%c", 255 - c);
+		bits = 0;
+		c = 0;
+	}
 }
- 
 
 int main()
 {
-    val = (t_client *) malloc(sizeof(t_client));
-    if (!val)
-        return 1;
-    void (*sig_handler_return) (int);
-    sig_handler_return = signal(SIGUSR1, handler_sig);
-    if (sig_handler_return == SIG_ERR)
-    {
-        perror("Signal Error");
-        return 1;
-    }
-    sig_handler_return = signal(SIGUSR2, handler_sig);
-    if (sig_handler_return == SIG_ERR)
-    {
-        perror("Signal Error");
-        return 1;
-    }
-    pid_t pid_s = getpid();
-    printf("Server pid is %d\n", pid_s);
-    while(1)
-    {
-        sleep(10);
-    }
-    // pause();
+	void	(*sig_handler_return) (int);
+	int		server_pid;
+
+	server_pid = getpid();
+	val = (t_server *) malloc(sizeof(t_server));
+	if (!val)
+		return (1);
+	sig_handler_return = signal(SIGUSR1, handle_sig);
+	if (sig_handler_return == SIG_ERR)
+		return (1);
+	sig_handler_return = signal(SIGUSR2, handle_sig);
+	if (sig_handler_return == SIG_ERR)
+		return (1);
+	ft_printf("Server PID is: %d\n", server_pid);
+	while (1)
+	{
+		sleep(10);
+	}
 }

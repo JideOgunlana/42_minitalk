@@ -29,11 +29,9 @@ $(CLIENT): ft_minitalk.h $(FT_PRINTF_OBJ) $(CLIENT_OBJS)
 
 clean:
 	$(RM) $(SERVER_OBJS) $(CLIENT_OBJS)
-	make -C $(FT_PRINTF_DIR) clean
 
 fclean: clean
 	$(RM) $(SERVER) $(CLIENT)
-	make -C $(FT_PRINTF_DIR) clean
 
 re: fclean all
 

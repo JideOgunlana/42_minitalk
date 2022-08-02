@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:14:53 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/08/01 17:41:53 by bogunlan         ###   ########.fr       */
+/*   Updated: 2022/08/02 15:42:52 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void	parse_message(char *message, int message_len, pid_t server_pid)
 	}
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	pid_t 	server_pid;
+	pid_t	server_pid;
 	int		message_len;
-	
+
 	if (argc != 3)
 	{
 		ft_printf("Usage: ./client <server_pid> <message>\n");

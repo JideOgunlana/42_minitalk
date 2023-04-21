@@ -6,11 +6,11 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:14:53 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/08/02 15:42:52 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/04/21 10:39:44 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minitalk.h"
+#include "../includes/ft_minitalk.h"
 
 void	send_signal(char *res, pid_t server_pid)
 {
@@ -20,9 +20,11 @@ void	send_signal(char *res, pid_t server_pid)
 	while (res[i] != '\0')
 	{
 		if (res[i] == '0')
-			kill(server_pid, SIGUSR1);
+			if (kill(server_pid, SIGUSR1) != 0)
+				exit(1);
 		if (res[i] == '1')
-			kill(server_pid, SIGUSR2);
+			if (kill(server_pid, SIGUSR2) != 0)
+				exit(1);
 		usleep(400);
 		i++;
 	}
@@ -70,7 +72,7 @@ int	main(int argc, char *argv[])
 	else
 	{
 		server_pid = ft_atoi(argv[1]);
-		if (server_pid <= 0)
+		if (server_pid <= 0 || server_pid > INT16_MAX)
 		{
 			ft_printf("Usage: ./client <server_pid> <message>\n");
 			exit(1);

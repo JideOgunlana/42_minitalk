@@ -1,1 +1,1 @@
-# 42_minitalk
+# Minitalk

@@ -55,17 +55,17 @@ $(CLIENT_BONUS): $(FT_PRINTF_OBJ) $(CLIENT_BONUS_OBJS) $(UTILS_BONUS_OBJS)
 
 $(FT_PRINTF_OBJ):
 	make -C $(FT_PRINTF_DIR)
-	make clean -C $(FT_PRINTF_DIR)
 
 bonus: $(SERVER_BONUS) $(CLIENT_BONUS)
 	@printf "$(BLUE)server_bonus and client_bonus(RESET) $(GREEN)compiled successfully$(RESET)"
 
 clean:
 	$(RM) $(SERVER_OBJS) $(CLIENT_OBJS) $(SERVER_BONUS_OBJS) $(CLIENT_BONUS_OBJS) $(UTILS_BONUS_OBJS)
+	make clean -C $(FT_PRINTF_DIR)
 
 fclean: clean
 	$(RM) $(SERVER) $(CLIENT) $(SERVER_BONUS) $(CLIENT_BONUS)
-	$(RM) -f $(FT_PRINTF_OBJ)
+	make fclean -C $(FT_PRINTF_DIR)
 
 re: fclean all
 

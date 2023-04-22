@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:41:28 by bogunlan          #+#    #+#             */
-/*   Updated: 2023/04/21 10:42:53 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/04/22 14:43:41 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	get_client_pid(void)
 	pow = 1;
 	if (g_received.bit == 8)
 	{
-		c = ft_binary_to_decimal(g_received.messg/*  + (g_received.counter - 7) */);
+		c = ft_binary_to_decimal(g_received.messg);
 		if (c == '$')
 			g_received.c_pid_status = 1;
 		else
@@ -74,7 +74,7 @@ void	handle_sig(int signum)
 		get_client_pid();
 	if (g_received.bit == 8 && g_received.c_pid_status == 1)
 	{
-		c = ft_binary_to_decimal(g_received.messg/*  + (g_received.counter - 7) */);
+		c = ft_binary_to_decimal(g_received.messg);
 		if (c == '\0')
 		{
 			g_received.c_pid_status = 0;
@@ -88,11 +88,17 @@ void	handle_sig(int signum)
 	// ++g_received.counter;
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	void	(*sig_handler_return)(int);
 	int		server_pid;
 
+	(void)argv;
+	if (argc != 1)
+	{
+		ft_printf("\e[33mServer usage:\e[0m ./server_bonus\n");
+		exit(1);
+	}
 	g_received.c_pid_status = 0;
 	g_received.c_pid_index = 0;
 	g_received.client_pid = 0;

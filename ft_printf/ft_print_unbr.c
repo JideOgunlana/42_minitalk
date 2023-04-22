@@ -21,7 +21,7 @@ int	ft_unsinged_nbr_l(unsigned int num)
 
 void	ft_put_unsigned_nbr_fd(unsigned int num, int fd, t_printf *val)
 {
-	if ((long int) num == -2147483648)
+	if ((int) num == INT_MIN)
 	{
 		val->tl += write(1, "-", 1);
 		num *= -1;
@@ -55,7 +55,7 @@ void	ft_print_unsigned_int(t_printf *val)
 
 	u = va_arg(val->args, unsigned int);
 	val->tl += ft_unsinged_nbr_l(u);
-	if ((long int)u != -2147483648)
+	if ((int)u != INT_MIN)
 		width_count = val->width - ft_unsinged_nbr_l(u);
 	else
 		width_count = val->width - ft_unsinged_nbr_l(u) - 1;

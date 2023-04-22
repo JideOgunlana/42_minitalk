@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:41:28 by bogunlan          #+#    #+#             */
-/*   Updated: 2023/04/21 10:39:49 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/04/22 13:00:22 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,17 @@ void	handle_sig(int signum)
 	// g_received.counter++;
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	void	(*sig_handler_return)(int);
 	int		server_pid;
 
+	(void)argv;
+	if (argc != 1)
+	{
+		ft_printf("\e[33mServer usage:\e[0m ./server\n");
+		exit(1);
+	}
 	server_pid = getpid();
 	sig_handler_return = signal(SIGUSR1, handle_sig);
 	if (sig_handler_return == SIG_ERR)
@@ -68,7 +74,7 @@ int	main(void)
 	sig_handler_return = signal(SIGUSR2, handle_sig);
 	if (sig_handler_return == SIG_ERR)
 		return (1);
-	ft_printf("Server PID is: %d\n", server_pid);
+	ft_printf("\e[33mServer PID is: \e[0m\e[34m%d\e[0m\n", server_pid);
 	while (1)
 	{
 		sleep(10);

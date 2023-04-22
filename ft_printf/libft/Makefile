@@ -73,20 +73,20 @@ BONUSOBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(BONUS_FILES)))
 
 
 .c.o: $(SRCS) $(BONUSSRCS)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
 $(NAME): $(OBJS) $(BONUSOBJS)
-	$(AR) $@ $^
+	@$(AR) $@ $^
 
 all: $(NAME)
 
 bonus: $(NAME)
 
 clean:
-	$(RM) $(OBJS) $(BONUSOBJS)
+	@$(RM) $(OBJS) $(BONUSOBJS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: clean all
 

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:41:28 by bogunlan          #+#    #+#             */
-/*   Updated: 2023/04/22 13:00:22 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:52:18 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_minitalk.h"
+
+t_server	g_received;
 
 int	ft_binary_to_decimal(const char *str)
 {
@@ -39,7 +41,6 @@ int	ft_binary_to_decimal(const char *str)
 
 void	handle_sig(int signum)
 {
-	static t_server	g_received;
 	int			c;
 
 	if (signum == SIGUSR1)
@@ -49,11 +50,10 @@ void	handle_sig(int signum)
 	g_received.bit += 1;
 	if (g_received.bit == 8)
 	{
-		c = ft_binary_to_decimal(g_received.messg/*  + (g_received.counter - 7) */);
+		c = ft_binary_to_decimal(g_received.messg);
 		write(STDOUT_FILENO, &c, 1);
 		g_received.bit = 0;
 	}
-	// g_received.counter++;
 }
 
 int	main(int argc, char **argv)
@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 	void	(*sig_handler_return)(int);
 	int		server_pid;
 
-	(void)argv;
+	(void) argv;
 	if (argc != 1)
 	{
 		ft_printf("\e[33mServer usage:\e[0m ./server\n");
@@ -77,6 +77,6 @@ int	main(int argc, char **argv)
 	ft_printf("\e[33mServer PID is: \e[0m\e[34m%d\e[0m\n", server_pid);
 	while (1)
 	{
-		sleep(10);
+		pause();
 	}
 }

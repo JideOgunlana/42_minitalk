@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:41:28 by bogunlan          #+#    #+#             */
-/*   Updated: 2023/04/22 14:43:41 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:39:11 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ void	handle_sig(int signum)
 			g_received.c_pid_index = 0;
 			kill(g_received.client_pid, SIGUSR1);
 			g_received.client_pid = 0;
+			write(STDOUT_FILENO, "\n", 1);
 		}
 		write(STDOUT_FILENO, &c, 1);
 		g_received.bit = 0;
 	}
-	// ++g_received.counter;
 }
 
 int	main(int argc, char **argv)

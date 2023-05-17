@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:14:53 by bogunlan          #+#    #+#             */
-/*   Updated: 2023/04/21 10:39:44 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:52:28 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		ft_printf("Usage: ./client <server_pid> <message>\n");
+		ft_putstr_fd("\e[33mUsage:\e[0m ./client <server_pid> <message>\n", STDERR_FILENO);
 		exit(1);
 	}
 	else
@@ -74,7 +74,7 @@ int	main(int argc, char *argv[])
 		server_pid = ft_atoi(argv[1]);
 		if (server_pid <= 0 || server_pid > INT16_MAX)
 		{
-			ft_printf("Usage: ./client <server_pid> <message>\n");
+			ft_printf("\e[33mUsage:\e[0m ./client <server_pid> <message>\n");
 			exit(1);
 		}
 		message_len = ft_strlen(argv[2]);

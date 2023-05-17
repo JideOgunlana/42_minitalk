@@ -6,7 +6,7 @@
 /*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 03:02:06 by bogunlan          #+#    #+#             */
-/*   Updated: 2023/04/21 10:42:36 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:14:48 by bogunlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_client_error(void)
 {
-	ft_printf("Usage: ./client <server_pid> <message>\n");
+	ft_putstr_fd("\e[33mUsage:\e[0m ./client <server_pid> <message>\n", STDERR_FILENO);
 	exit(1);
 }
 

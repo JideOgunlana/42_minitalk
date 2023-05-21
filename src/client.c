@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:14:53 by bogunlan          #+#    #+#             */
-/*   Updated: 2023/05/15 10:52:28 by codespace        ###   ########.fr       */
+/*   Updated: 2023/05/21 16:05:51 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	send_signal(char *res, pid_t server_pid)
 		if (res[i] == '1')
 			if (kill(server_pid, SIGUSR2) != 0)
 				exit(1);
-		usleep(400);
+		usleep(7000); // time made slower due to different machines
 		i++;
 	}
 }

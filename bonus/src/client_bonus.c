@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:14:53 by bogunlan          #+#    #+#             */
-/*   Updated: 2023/04/21 10:42:46 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/05/21 16:06:03 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	send_signal(char *res, pid_t server_pid)
 		if (res[i] == '1')
 			if (kill(server_pid, SIGUSR2) != 0)
 				exit(1);
-		usleep(600);
+		usleep(7000); // time made slower due to different machines
 		i++;
 	}
 }

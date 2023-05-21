@@ -59,7 +59,6 @@ bonus: re
 
 clean:
 	@$(RM) $(OBJS) $(LIBFT_OBJS)
-	make clean -C libft/
 
 fclean: clean
 	@$(RM) $(NAME)

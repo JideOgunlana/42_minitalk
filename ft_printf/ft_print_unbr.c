@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_unbr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:35:01 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/06/05 20:06:26 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:31:15 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_unsinged_nbr_l(unsigned int num)
 
 void	ft_put_unsigned_nbr_fd(unsigned int num, int fd, t_printf *val)
 {
-	if ((int) num == INT_MIN)
+	if ((int)num == INT32_MIN)
 	{
 		val->tl += write(1, "-", 1);
 		num *= -1;
@@ -55,7 +55,7 @@ void	ft_print_unsigned_int(t_printf *val)
 
 	u = va_arg(val->args, unsigned int);
 	val->tl += ft_unsinged_nbr_l(u);
-	if ((int)u != INT_MIN)
+	if ((int)u != INT32_MIN)
 		width_count = val->width - ft_unsinged_nbr_l(u);
 	else
 		width_count = val->width - ft_unsinged_nbr_l(u) - 1;

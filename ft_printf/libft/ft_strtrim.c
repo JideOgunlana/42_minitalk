@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bogunlan <bogunlan@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 17:52:26 by bogunlan          #+#    #+#             */
-/*   Updated: 2022/04/24 17:51:23 by bogunlan         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:23:16 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static unsigned int	ft_e(char const *s1, char const *set)
 {
 	unsigned int	temp_end;
 	unsigned int	index;
-	int				i;
+	unsigned char	i;
 
 	i = ft_strlen(s1) - 1;
 	temp_end = ft_strlen(s1) - 1;
-	while ((i >= 0))
+	while ((i > 0))
 	{
 		index = temp_end;
 		if (ft_strchr(set, s1[i--]))

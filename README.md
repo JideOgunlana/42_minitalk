@@ -16,5 +16,6 @@
 - Bonus feature: Server acknowledges every message received by sending a signal back to the client.
 - Bonus feature: Support for Unicode characters.
 
-## Credits
-This project is part of the curriculum at 42, a coding school that fosters peer-to-peer learning and project-based education.
+
+<h2>Credits</h3>
+This project is part of the curriculum at <a href="https://www.42heilbronn.de"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/42_Logo.svg/1200px-42_Logo.svg.png" width="20" alt="42" /></a>, a coding school that fosters peer-to-peer learning and project-based education.
